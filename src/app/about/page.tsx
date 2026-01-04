@@ -1,8 +1,11 @@
 import Link from "next/link";
 
+import Image from "next/image";
+
 export const metadata = {
   title: "About | Portfolio",
-  description: "Learn more about my journey from frontend development to network administration",
+  description:
+    "Learn more about my journey from frontend development to network administration",
 };
 
 const timeline = [
@@ -75,17 +78,26 @@ export default function About() {
               <div className="relative">
                 <div className="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-2xl bg-gradient-to-br from-primary to-secondary p-1">
                   <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center">
-                    <svg
+                    <Image
+                      src={"/tikaram_ac.jpeg"}
+                      alt="Profile Picture"
+                      width={320}
+                      height={320}
+                      className="w-full h-full object-cover rounded-2xl"
+                    />
+                    {/* <svg
                       className="w-32 h-32 text-foreground-muted"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                    </svg>
+                    </svg> */}
                   </div>
                 </div>
                 <div className="absolute -bottom-4 -right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg">
-                  <span className="text-sm font-medium">3+ Years Experience</span>
+                  <span className="text-sm font-medium">
+                    3+ Years Experience
+                  </span>
                 </div>
               </div>
             </div>
@@ -96,19 +108,20 @@ export default function About() {
                 About Me
               </h1>
               <p className="text-lg text-foreground-secondary mb-4">
-                I&apos;m a passionate software engineer with over 3 years of experience
-                in frontend development. My journey has taken me through building
-                modern web and mobile applications using React, Next.js, and React
-                Native.
+                I&apos;m a passionate software engineer with over 3 years of
+                experience in frontend development. My journey has taken me
+                through building modern web and mobile applications using React,
+                Next.js, and React Native.
               </p>
               <p className="text-lg text-foreground-secondary mb-4">
-                Now, I&apos;m embarking on an exciting new chapter: transitioning into{" "}
+                Now, I&apos;m embarking on an exciting new chapter:
+                transitioning into{" "}
                 <span className="text-primary font-semibold">
                   Network Administration
                 </span>
-                . I&apos;m drawn to the foundational role that networks play in our
-                digital infrastructure and am eager to bring my problem-solving
-                skills to this field.
+                . I&apos;m drawn to the foundational role that networks play in
+                our digital infrastructure and am eager to bring my
+                problem-solving skills to this field.
               </p>
               <p className="text-lg text-foreground-secondary">
                 I believe that my background in software development gives me a
@@ -205,7 +218,9 @@ export default function About() {
                 <h3 className="text-xl font-semibold text-foreground mb-2">
                   {reason.title}
                 </h3>
-                <p className="text-foreground-secondary">{reason.description}</p>
+                <p className="text-foreground-secondary">
+                  {reason.description}
+                </p>
               </div>
             ))}
           </div>
@@ -346,8 +361,8 @@ export default function About() {
             Let&apos;s Connect
           </h2>
           <p className="text-foreground-secondary mb-8 max-w-2xl mx-auto">
-            I&apos;m always open to discussing new opportunities, whether in frontend
-            development or network administration.
+            I&apos;m always open to discussing new opportunities, whether in
+            frontend development or network administration.
           </p>
           <Link
             href="/contact"

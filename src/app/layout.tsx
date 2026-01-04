@@ -16,9 +16,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Software Engineer & Network Administrator",
-  description: "Professional portfolio showcasing 3+ years of frontend development experience with React, Next.js, and React Native. Transitioning to Network Administration.",
+  title: "Tikaram Ac | Software Engineer & Network Administrator",
+  description:
+    "Professional portfolio showcasing 3+ years of frontend development experience with React, Next.js, and React Native. Transitioning to Network Administration.",
 };
+
+// Script to prevent flash of wrong theme
+const themeScript = `
+  (function() {
+    try {
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.style.colorScheme = theme;
+    } catch (e) {}
+  })();
+`;
 
 export default function RootLayout({
   children,
@@ -27,6 +42,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >

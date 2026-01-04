@@ -61,29 +61,35 @@ export default function Header() {
             href="/"
             className="text-xl font-bold text-foreground hover:text-primary transition-colors"
           >
-            Portfolio
+            tikaram.ac
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`relative py-2 text-sm font-medium transition-colors duration-200 ${
                   pathname === link.href
-                    ? "bg-primary text-white"
-                    : "text-foreground-secondary hover:text-foreground hover:bg-card-hover"
+                    ? "text-primary"
+                    : "text-foreground-secondary hover:text-foreground"
                 }`}
               >
                 {link.label}
+                {/* Animated underline */}
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-primary to-secondary transition-all duration-300 ${
+                    pathname === link.href ? "w-full" : "w-0"
+                  }`}
+                />
               </Link>
             ))}
 
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="ml-4 p-2 rounded-lg bg-card hover:bg-card-hover border border-border transition-colors"
+              className="p-2 rounded-full hover:bg-card-hover transition-colors"
               aria-label="Toggle theme"
             >
               <ThemeIcon />
@@ -94,14 +100,14 @@ export default function Header() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-card hover:bg-card-hover border border-border transition-colors"
+              className="p-2 rounded-full hover:bg-card-hover transition-colors"
               aria-label="Toggle theme"
             >
               <ThemeIcon />
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-card hover:bg-card-hover border border-border transition-colors"
+              className="p-2 rounded-full hover:bg-card-hover transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -139,16 +145,16 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-2">
+          <div className="md:hidden py-4 border-t border-border animate-fade-in">
+            <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-3 text-sm font-medium transition-colors ${
                     pathname === link.href
-                      ? "bg-primary text-white"
+                      ? "text-primary border-l-2 border-primary bg-primary/5"
                       : "text-foreground-secondary hover:text-foreground hover:bg-card-hover"
                   }`}
                 >
