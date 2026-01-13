@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * Windows 11 Desktop Component
@@ -22,14 +22,26 @@ const WindowsIcon = () => (
 );
 
 const SearchIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="w-4 h-4"
+  >
     <circle cx="11" cy="11" r="8" />
     <path d="M21 21l-4.35-4.35" />
   </svg>
 );
 
 const TaskViewIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="w-5 h-5"
+  >
     <rect x="3" y="3" width="7" height="7" rx="1" />
     <rect x="14" y="3" width="7" height="7" rx="1" />
     <rect x="3" y="14" width="7" height="7" rx="1" />
@@ -38,7 +50,13 @@ const TaskViewIcon = () => (
 );
 
 const WidgetsIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="w-5 h-5"
+  >
     <rect x="3" y="3" width="8" height="10" rx="2" />
     <rect x="13" y="3" width="8" height="6" rx="2" />
     <rect x="13" y="11" width="8" height="10" rx="2" />
@@ -47,7 +65,11 @@ const WidgetsIcon = () => (
 );
 
 const FileExplorerIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-yellow-500">
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-6 h-6 text-yellow-500"
+  >
     <path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
   </svg>
 );
@@ -61,12 +83,21 @@ const EdgeIcon = () => (
       </linearGradient>
     </defs>
     <circle cx="12" cy="12" r="10" fill="url(#edge-gradient)" />
-    <path d="M7 12c0-2.8 2.2-5 5-5 1.4 0 2.6.5 3.5 1.5l-2 2c-.4-.4-1-.7-1.5-.7-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5c.8 0 1.5-.4 2-1h-2v-2h5v1c0 2.8-2.2 5-5 5s-5-2.2-5-5z" fill="white" />
+    <path
+      d="M7 12c0-2.8 2.2-5 5-5 1.4 0 2.6.5 3.5 1.5l-2 2c-.4-.4-1-.7-1.5-.7-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5c.8 0 1.5-.4 2-1h-2v-2h5v1c0 2.8-2.2 5-5 5s-5-2.2-5-5z"
+      fill="white"
+    />
   </svg>
 );
 
 const SettingsIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="w-6 h-6"
+  >
     <circle cx="12" cy="12" r="3" />
     <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
   </svg>
@@ -92,19 +123,35 @@ const VSCodeIcon = () => (
 const StoreIcon = () => (
   <svg viewBox="0 0 24 24" className="w-6 h-6">
     <rect width="24" height="24" rx="4" fill="#0078D4" />
-    <path d="M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z" fill="white" opacity="0.9" />
+    <path
+      d="M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z"
+      fill="white"
+      opacity="0.9"
+    />
   </svg>
 );
 
 const PowerIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="w-5 h-5"
+  >
     <path d="M12 3v9" />
     <path d="M18.4 6.6a9 9 0 1 1-12.8 0" />
   </svg>
 );
 
 const UserIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="w-5 h-5"
+  >
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
     <circle cx="12" cy="7" r="4" />
   </svg>
@@ -130,7 +177,13 @@ const BatteryIcon = () => (
 );
 
 const ChevronUpIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="w-3 h-3"
+  >
     <path d="M18 15l-6-6-6 6" />
   </svg>
 );
@@ -179,15 +232,15 @@ export function Win11Desktop({
   }, []);
 
   // Format time and date
-  const timeString = currentTime.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
+  const timeString = currentTime.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
     hour12: true,
   });
-  const dateString = currentTime.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
+  const dateString = currentTime.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
 
   // Close menus when clicking outside
@@ -224,7 +277,10 @@ export function Win11Desktop({
         <HomeWidgets currentTime={currentTime} />
 
         {/* Desktop Icons */}
-        <div className="grid gap-2 mt-4" style={{ gridTemplateColumns: 'repeat(auto-fill, 80px)' }}>
+        <div
+          className="grid gap-2 mt-4"
+          style={{ gridTemplateColumns: "repeat(auto-fill, 80px)" }}
+        >
           {desktopIcons.map((icon) => (
             <DesktopIconButton
               key={icon.id}
@@ -327,9 +383,9 @@ function DesktopIconButton({
 function HomeWidgets({ currentTime }: { currentTime: Date }) {
   const greeting = () => {
     const hour = currentTime.getHours();
-    if (hour < 12) return 'Good Morning';
-    if (hour < 17) return 'Good Afternoon';
-    return 'Good Evening';
+    if (hour < 12) return "Good Morning";
+    if (hour < 17) return "Good Afternoon";
+    return "Good Evening";
   };
 
   return (
@@ -341,13 +397,15 @@ function HomeWidgets({ currentTime }: { currentTime: Date }) {
     >
       {/* Welcome Banner */}
       <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-white/10 mb-4">
-        <h1 className="text-3xl font-light text-white mb-1">{greeting()}, Tikaram</h1>
+        <h1 className="text-3xl font-light text-white mb-1">
+          {greeting()}, Tikaram
+        </h1>
         <p className="text-white/70 text-sm">
-          {currentTime.toLocaleDateString('en-US', {
-            weekday: 'long',
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
+          {currentTime.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric",
           })}
         </p>
       </div>
@@ -358,7 +416,13 @@ function HomeWidgets({ currentTime }: { currentTime: Date }) {
         <div className="bg-black/30 backdrop-blur-xl rounded-xl p-4 border border-white/10">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-4 h-4">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                className="w-4 h-4"
+              >
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -366,7 +430,8 @@ function HomeWidgets({ currentTime }: { currentTime: Date }) {
             <span className="text-white font-medium">About Me</span>
           </div>
           <p className="text-white/70 text-sm">
-            Software Engineer with 3+ years of frontend experience. Transitioning to Network Administration.
+            Software Engineer with 3+ years of frontend experience.
+            Transitioning to Network Administration.
           </p>
         </div>
 
@@ -374,7 +439,13 @@ function HomeWidgets({ currentTime }: { currentTime: Date }) {
         <div className="bg-black/30 backdrop-blur-xl rounded-xl p-4 border border-white/10">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-4 h-4">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                className="w-4 h-4"
+              >
                 <polyline points="16 18 22 12 16 6" />
                 <polyline points="8 6 2 12 8 18" />
               </svg>
@@ -382,8 +453,11 @@ function HomeWidgets({ currentTime }: { currentTime: Date }) {
             <span className="text-white font-medium">Tech Stack</span>
           </div>
           <div className="flex flex-wrap gap-1">
-            {['React', 'Next.js', 'TypeScript', 'React Native'].map((tech) => (
-              <span key={tech} className="text-xs px-2 py-1 bg-white/10 rounded text-white/80">
+            {["React", "Next.js", "TypeScript", "React Native"].map((tech) => (
+              <span
+                key={tech}
+                className="text-xs px-2 py-1 bg-white/10 rounded text-white/80"
+              >
                 {tech}
               </span>
             ))}
@@ -400,8 +474,12 @@ function HomeWidgets({ currentTime }: { currentTime: Date }) {
             </div>
             <span className="text-white font-medium">Status</span>
           </div>
-          <p className="text-green-400 text-sm font-medium">Available for opportunities</p>
-          <p className="text-white/50 text-xs mt-1">Open to frontend & network admin roles</p>
+          <p className="text-green-400 text-sm font-medium">
+            Available for opportunities
+          </p>
+          <p className="text-white/50 text-xs mt-1">
+            Open to frontend & network admin roles
+          </p>
         </div>
       </div>
 
@@ -535,7 +613,7 @@ function TaskbarButton({
         hover:bg-white/10
         active:bg-white/15
         transition-colors
-        ${isActive ? 'bg-white/15' : ''}
+        ${isActive ? "bg-white/15" : ""}
       `}
     >
       {children}
@@ -563,9 +641,9 @@ function StartMenu({
   onAppClick: (id: string) => void;
 }) {
   const recommendedItems = [
-    { id: 'recent-1', label: 'Project Files', time: 'Recently opened' },
-    { id: 'recent-2', label: 'portfolio-design.fig', time: '2 hours ago' },
-    { id: 'recent-3', label: 'README.md', time: 'Yesterday' },
+    { id: "recent-1", label: "Project Files", time: "Recently opened" },
+    { id: "recent-2", label: "portfolio-design.fig", time: "2 hours ago" },
+    { id: "recent-3", label: "README.md", time: "Yesterday" },
   ];
 
   return (
@@ -575,7 +653,7 @@ function StartMenu({
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="
             absolute bottom-14 left-1/2 -translate-x-1/2
             w-[600px]
@@ -697,7 +775,9 @@ function StartMenuItem({
       "
     >
       <div className="w-8 h-8 flex items-center justify-center">{icon}</div>
-      <span className="text-xs text-white text-center line-clamp-1">{label}</span>
+      <span className="text-xs text-white text-center line-clamp-1">
+        {label}
+      </span>
     </button>
   );
 }
@@ -718,7 +798,7 @@ function SearchPanel({
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="
             absolute bottom-14 left-1/2 -translate-x-1/2
             w-[600px]
@@ -762,10 +842,10 @@ function SearchPanel({
             </h3>
             <div className="flex gap-2">
               {[
-                { icon: <EdgeIcon />, label: 'Edge' },
-                { icon: <VSCodeIcon />, label: 'VS Code' },
-                { icon: <FileExplorerIcon />, label: 'Files' },
-                { icon: <SettingsIcon />, label: 'Settings' },
+                { icon: <EdgeIcon />, label: "Edge" },
+                { icon: <VSCodeIcon />, label: "VS Code" },
+                { icon: <FileExplorerIcon />, label: "Files" },
+                { icon: <SettingsIcon />, label: "Settings" },
               ].map((app) => (
                 <button
                   key={app.label}
