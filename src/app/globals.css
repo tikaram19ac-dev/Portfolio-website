@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Import Windows 11 design system */
+@import "../components/win11/win11-theme.css";
+
 /* Customizable Theme Colors - Change these to customize your portfolio */
 :root {
   /* Primary accent color - used for links, buttons, highlights */

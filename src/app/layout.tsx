@@ -2,8 +2,21 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+
+/**
+ * Root Layout
+ *
+ * This layout provides the base structure for all pages.
+ * The Windows 11 design system is integrated via globals.css.
+ *
+ * Note: Header and Footer are removed from root layout because:
+ * - Home page uses the Windows 11 layout with its own taskbar navigation
+ * - Other pages use the PageLayout component which includes Header/Footer
+ *
+ * This separation allows for different navigation patterns:
+ * - Home: App-like experience with floating taskbar
+ * - Other pages: Traditional website navigation
+ */
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,12 +59,10 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <ThemeProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          {children}
         </ThemeProvider>
       </body>
     </html>

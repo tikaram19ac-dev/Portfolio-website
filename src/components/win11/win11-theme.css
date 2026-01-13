@@ -1,0 +1,327 @@
+/**
+ * Windows 11 Design Tokens & Theme
+ *
+ * This file contains all the CSS custom properties and utility classes
+ * needed to create a Windows 11-inspired aesthetic.
+ *
+ * Key design characteristics:
+ * - Mica/Acrylic material effects (backdrop-filter blur)
+ * - Large corner radius (8-12px)
+ * - Subtle shadows with multiple layers
+ * - Windows 11 accent colors
+ * - Natural easing curves (cubic-bezier)
+ */
+
+/* ==================== WINDOWS 11 COLOR TOKENS ==================== */
+
+:root {
+  /* Windows 11 accent colors - Default blue */
+  --win11-accent: #0078d4;
+  --win11-accent-light: #60cdff;
+  --win11-accent-dark: #005a9e;
+  --win11-accent-hover: #006cbd;
+
+  /* Background materials */
+  --win11-mica-light: rgba(243, 243, 243, 0.8);
+  --win11-mica-dark: rgba(32, 32, 32, 0.8);
+  --win11-acrylic-light: rgba(255, 255, 255, 0.7);
+  --win11-acrylic-dark: rgba(44, 44, 44, 0.65);
+
+  /* Surface colors - Light mode */
+  --win11-bg-base: #f3f3f3;
+  --win11-bg-surface: #ffffff;
+  --win11-bg-surface-secondary: #fafafa;
+  --win11-bg-card: #ffffff;
+  --win11-bg-card-hover: #f9f9f9;
+
+  /* Text colors - Light mode */
+  --win11-text-primary: #1a1a1a;
+  --win11-text-secondary: #5c5c5c;
+  --win11-text-disabled: #a0a0a0;
+  --win11-text-accent: #0067c0;
+
+  /* Border colors */
+  --win11-border: rgba(0, 0, 0, 0.0578);
+  --win11-border-strong: rgba(0, 0, 0, 0.1);
+  --win11-border-accent: var(--win11-accent);
+
+  /* Shadow definitions - Multiple layers for depth */
+  --win11-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --win11-shadow-md:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.04);
+  --win11-shadow-lg:
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 16px 32px rgba(0, 0, 0, 0.04);
+  --win11-shadow-xl:
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 16px 32px rgba(0, 0, 0, 0.08),
+    0 32px 64px rgba(0, 0, 0, 0.08);
+
+  /* Elevated shadow (for floating elements like taskbar) */
+  --win11-shadow-elevated:
+    0 0 1px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(0, 0, 0, 0.14);
+
+  /* Corner radius - Windows 11 uses larger, softer corners */
+  --win11-radius-sm: 4px;
+  --win11-radius-md: 8px;
+  --win11-radius-lg: 12px;
+  --win11-radius-xl: 16px;
+  --win11-radius-full: 9999px;
+
+  /* Blur values for glassmorphism */
+  --win11-blur-sm: 8px;
+  --win11-blur-md: 16px;
+  --win11-blur-lg: 30px;
+  --win11-blur-xl: 60px;
+
+  /* Animation timing - Windows 11 uses natural, gentle easing */
+  --win11-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --win11-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --win11-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --win11-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Duration values */
+  --win11-duration-fast: 100ms;
+  --win11-duration-normal: 200ms;
+  --win11-duration-slow: 300ms;
+  --win11-duration-slower: 400ms;
+
+  /* Taskbar height */
+  --win11-taskbar-height: 48px;
+}
+
+/* ==================== DARK MODE OVERRIDES ==================== */
+
+[data-theme='dark'] {
+  --win11-bg-base: #202020;
+  --win11-bg-surface: #2d2d2d;
+  --win11-bg-surface-secondary: #252525;
+  --win11-bg-card: #2d2d2d;
+  --win11-bg-card-hover: #383838;
+
+  --win11-text-primary: #ffffff;
+  --win11-text-secondary: #c5c5c5;
+  --win11-text-disabled: #6e6e6e;
+  --win11-text-accent: #60cdff;
+
+  --win11-border: rgba(255, 255, 255, 0.0837);
+  --win11-border-strong: rgba(255, 255, 255, 0.15);
+
+  --win11-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.16);
+  --win11-shadow-md:
+    0 2px 4px rgba(0, 0, 0, 0.16),
+    0 4px 8px rgba(0, 0, 0, 0.12);
+  --win11-shadow-lg:
+    0 4px 8px rgba(0, 0, 0, 0.16),
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 16px 32px rgba(0, 0, 0, 0.08);
+  --win11-shadow-xl:
+    0 8px 16px rgba(0, 0, 0, 0.24),
+    0 16px 32px rgba(0, 0, 0, 0.16),
+    0 32px 64px rgba(0, 0, 0, 0.12);
+  --win11-shadow-elevated:
+    0 0 1px rgba(0, 0, 0, 0.24),
+    0 8px 16px rgba(0, 0, 0, 0.28);
+}
+
+/* ==================== WINDOWS 11 ANIMATIONS ==================== */
+
+/* Smooth fade in with slight scale - used for modals and windows */
+@keyframes win11-fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide up animation - used for taskbar and bottom sheets */
+@keyframes win11-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide down animation */
+@keyframes win11-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle hover lift */
+@keyframes win11-hover-lift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-2px);
+  }
+}
+
+/* Backdrop fade for modals */
+@keyframes win11-backdrop-fade {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(var(--win11-blur-sm));
+  }
+}
+
+/* Gentle pulse for active states */
+@keyframes win11-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Exit animations */
+@keyframes win11-fade-out-scale {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+
+/* Acrylic/Mica material backgrounds */
+.win11-acrylic {
+  background: var(--win11-acrylic-light);
+  backdrop-filter: blur(var(--win11-blur-lg)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--win11-blur-lg)) saturate(180%);
+}
+
+[data-theme='dark'] .win11-acrylic {
+  background: var(--win11-acrylic-dark);
+}
+
+.win11-mica {
+  background: var(--win11-mica-light);
+  backdrop-filter: blur(var(--win11-blur-xl)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--win11-blur-xl)) saturate(150%);
+}
+
+[data-theme='dark'] .win11-mica {
+  background: var(--win11-mica-dark);
+}
+
+/* Surface styles */
+.win11-surface {
+  background: var(--win11-bg-surface);
+  border: 1px solid var(--win11-border);
+  border-radius: var(--win11-radius-lg);
+  box-shadow: var(--win11-shadow-md);
+}
+
+.win11-surface-elevated {
+  background: var(--win11-bg-surface);
+  border: 1px solid var(--win11-border);
+  border-radius: var(--win11-radius-lg);
+  box-shadow: var(--win11-shadow-elevated);
+}
+
+/* Interactive hover effect */
+.win11-hover {
+  transition:
+    background-color var(--win11-duration-fast) var(--win11-ease-default),
+    box-shadow var(--win11-duration-normal) var(--win11-ease-default),
+    transform var(--win11-duration-normal) var(--win11-ease-default);
+}
+
+.win11-hover:hover {
+  background: var(--win11-bg-card-hover);
+  box-shadow: var(--win11-shadow-lg);
+  transform: translateY(-1px);
+}
+
+.win11-hover:active {
+  transform: translateY(0);
+  box-shadow: var(--win11-shadow-sm);
+}
+
+/* Focus ring - Windows 11 style */
+.win11-focus:focus-visible {
+  outline: 2px solid var(--win11-accent);
+  outline-offset: 2px;
+}
+
+/* Animations */
+.win11-animate-in {
+  animation: win11-fade-in-scale var(--win11-duration-slow) var(--win11-ease-out);
+}
+
+.win11-animate-slide-up {
+  animation: win11-slide-up var(--win11-duration-slow) var(--win11-ease-out);
+}
+
+.win11-animate-slide-down {
+  animation: win11-slide-down var(--win11-duration-slow) var(--win11-ease-out);
+}
+
+/* Text styles */
+.win11-text-primary {
+  color: var(--win11-text-primary);
+}
+
+.win11-text-secondary {
+  color: var(--win11-text-secondary);
+}
+
+.win11-text-accent {
+  color: var(--win11-text-accent);
+}
+
+/* Scrollbar styling to match Windows 11 */
+.win11-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.win11-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.win11-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.win11-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .win11-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='dark'] .win11-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
