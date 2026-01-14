@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  // output: "export",
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+  // No basePath needed for custom domain (tikaram-acharya.com.np)
 };
 
 export default nextConfig;
