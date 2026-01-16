@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Win11Desktop } from "@/components/win11/Win11Desktop";
 import { AppWindow } from "@/components/win11/AppWindow";
+import Image from "next/image";
 
 /**
  * Windows 11 Desktop Portfolio
@@ -293,27 +294,459 @@ const pinnedApps = [
   },
 ];
 
+// ==================== PANEL CONTENT DATA ====================
+
+const aboutData = {
+  timeline: [
+    { year: "2024 - Present", title: "Transitioning to Network Administration", icon: "🔄" },
+    { year: "2021 - 2024", title: "Senior Frontend Developer", icon: "💼" },
+    { year: "2020 - 2021", title: "Frontend Developer", icon: "👨‍💻" },
+    { year: "2020", title: "Started Programming Journey", icon: "🚀" },
+  ],
+  certifications: [
+    { name: "CompTIA Network+ (In Progress)", status: "in-progress" },
+    { name: "CCNA (Planned)", status: "planned" },
+    { name: "AWS Cloud Practitioner", status: "completed" },
+  ],
+  interests: ["Network Security", "Cloud Computing", "Linux Administration", "Automation"],
+};
+
+const experienceData = [
+  {
+    title: "Senior Frontend Developer",
+    company: "Tech Company",
+    period: "2023 - 2024",
+    technologies: ["React", "Next.js", "TypeScript", "GraphQL"],
+  },
+  {
+    title: "Frontend Developer",
+    company: "Startup Inc",
+    period: "2021 - 2023",
+    technologies: ["React", "React Native", "Redux", "Node.js"],
+  },
+  {
+    title: "Junior Frontend Developer",
+    company: "Digital Agency",
+    period: "2020 - 2021",
+    technologies: ["JavaScript", "React", "HTML/CSS", "Git"],
+  },
+];
+
+const projectsData = [
+  { title: "E-Commerce Platform", tech: ["Next.js", "TypeScript", "Stripe"] },
+  { title: "Mobile Banking App", tech: ["React Native", "Redux", "Node.js"] },
+  { title: "Analytics Dashboard", tech: ["React", "D3.js", "WebSocket"] },
+  { title: "Task Management System", tech: ["React", "Firebase", "Tailwind"] },
+];
+
+const blogData = [
+  { title: "Transitioning from Frontend to Networking", category: "Career", readTime: "8 min" },
+  { title: "React Performance Optimization", category: "React", readTime: "12 min" },
+  { title: "Networking Fundamentals for Developers", category: "Networking", readTime: "10 min" },
+  { title: "Building Mobile Apps with React Native", category: "React Native", readTime: "15 min" },
+];
+
+// ==================== CLOSE ICON ====================
+
+const CloseIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+    <path d="M18 6L6 18M6 6l12 12" />
+  </svg>
+);
+
+// ==================== RIGHT SIDE PANEL ====================
+
+interface RightPanelProps {
+  activePanel: string | null;
+  onClose: () => void;
+  onNavigate: (path: string) => void;
+}
+
+const RightPanel = ({ activePanel, onClose, onNavigate }: RightPanelProps) => {
+  if (!activePanel) return null;
+
+  // Page routes for navigation
+  const pageRoutes: Record<string, string> = {
+    about: "/about",
+    experience: "/experience",
+    projects: "/experience",
+    blog: "/blog",
+    contact: "/contact",
+  };
+
+  const panelContent: Record<string, { title: string; icon: React.ReactNode; content: React.ReactNode }> = {
+    about: {
+      title: "About Me",
+      icon: (
+        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center p-1.5">
+          <UserIcon />
+        </div>
+      ),
+      content: (
+        <div className="space-y-6">
+          {/* Profile Section */}
+          <div className="flex items-center gap-4">
+            <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 p-0.5">
+              <Image
+                src="/tikaram_ac.jpeg"
+                alt="Profile"
+                width={80}
+                height={80}
+                className="w-full h-full object-cover rounded-xl"
+              />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--win11-text-primary)]">Tikaram</h3>
+              <p className="text-sm text-[var(--win11-text-secondary)]">Software Engineer</p>
+              <span className="text-xs px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded-full">3+ Years</span>
+            </div>
+          </div>
+
+          <p className="text-sm text-[var(--win11-text-secondary)]">
+            Passionate software engineer transitioning to Network Administration. Building modern web and mobile apps with React, Next.js, and React Native.
+          </p>
+
+          {/* Journey Timeline */}
+          <div>
+            <h4 className="text-sm font-semibold text-[var(--win11-text-primary)] mb-3">My Journey</h4>
+            <div className="space-y-2">
+              {aboutData.timeline.map((item, i) => (
+                <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-[var(--win11-bg-surface-secondary)]">
+                  <span className="text-lg">{item.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-[var(--win11-text-primary)] truncate">{item.title}</p>
+                    <p className="text-xs text-[var(--win11-text-secondary)]">{item.year}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Certifications */}
+          <div>
+            <h4 className="text-sm font-semibold text-[var(--win11-text-primary)] mb-3">Certifications</h4>
+            <div className="flex flex-wrap gap-2">
+              {aboutData.certifications.map((cert, i) => (
+                <span
+                  key={i}
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    cert.status === "completed"
+                      ? "bg-green-500/20 text-green-400"
+                      : cert.status === "in-progress"
+                      ? "bg-yellow-500/20 text-yellow-400"
+                      : "bg-gray-500/20 text-gray-400"
+                  }`}
+                >
+                  {cert.name}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Interests */}
+          <div>
+            <h4 className="text-sm font-semibold text-[var(--win11-text-primary)] mb-3">Interests</h4>
+            <div className="flex flex-wrap gap-2">
+              {aboutData.interests.map((interest, i) => (
+                <span key={i} className="text-xs px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  {interest}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    experience: {
+      title: "Experience",
+      icon: (
+        <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center p-1.5">
+          <BriefcaseIcon />
+        </div>
+      ),
+      content: (
+        <div className="space-y-4">
+          <p className="text-sm text-[var(--win11-text-secondary)]">
+            3+ years of frontend development experience building modern web and mobile applications.
+          </p>
+
+          {/* Experience Cards */}
+          <div className="space-y-3">
+            {experienceData.map((exp, i) => (
+              <div key={i} className="p-4 rounded-xl bg-[var(--win11-bg-surface-secondary)] border border-[var(--win11-border)]">
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <h4 className="font-semibold text-[var(--win11-text-primary)]">{exp.title}</h4>
+                    <p className="text-sm text-purple-400">{exp.company}</p>
+                  </div>
+                  <span className="text-xs text-[var(--win11-text-secondary)]">{exp.period}</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 mt-2">
+                  {exp.technologies.map((tech, j) => (
+                    <span key={j} className="text-xs px-2 py-0.5 bg-purple-500/10 text-purple-400 rounded">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Skills Summary */}
+          <div className="p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-600/10 border border-purple-500/20">
+            <h4 className="text-sm font-semibold text-[var(--win11-text-primary)] mb-2">Core Skills</h4>
+            <div className="grid grid-cols-2 gap-2 text-xs text-[var(--win11-text-secondary)]">
+              <div>• React & Next.js</div>
+              <div>• TypeScript</div>
+              <div>• React Native</div>
+              <div>• Node.js</div>
+              <div>• GraphQL</div>
+              <div>• Tailwind CSS</div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    projects: {
+      title: "Projects",
+      icon: (
+        <div className="w-8 h-8">
+          <FolderIcon />
+        </div>
+      ),
+      content: (
+        <div className="space-y-4">
+          <p className="text-sm text-[var(--win11-text-secondary)]">
+            Featured projects showcasing my frontend development skills.
+          </p>
+
+          {/* Project Cards */}
+          <div className="grid grid-cols-1 gap-3">
+            {projectsData.map((project, i) => (
+              <div
+                key={i}
+                className="p-4 rounded-xl bg-[var(--win11-bg-surface-secondary)] border border-[var(--win11-border)] hover:border-yellow-500/50 transition-colors cursor-pointer"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5">
+                      <path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold text-[var(--win11-text-primary)]">{project.title}</h4>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tech.map((tech, j) => (
+                    <span key={j} className="text-xs px-2 py-0.5 bg-yellow-500/10 text-yellow-500 rounded">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+    blog: {
+      title: "Blog",
+      icon: (
+        <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center p-1.5">
+          <BookIcon />
+        </div>
+      ),
+      content: (
+        <div className="space-y-4">
+          <p className="text-sm text-[var(--win11-text-secondary)]">
+            Thoughts on frontend development, networking, and tech career transitions.
+          </p>
+
+          {/* Blog Posts */}
+          <div className="space-y-3">
+            {blogData.map((post, i) => (
+              <div
+                key={i}
+                className="p-4 rounded-xl bg-[var(--win11-bg-surface-secondary)] border border-[var(--win11-border)] hover:border-green-500/50 transition-colors cursor-pointer"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs px-2 py-0.5 bg-green-500/20 text-green-400 rounded-full">
+                    {post.category}
+                  </span>
+                  <span className="text-xs text-[var(--win11-text-secondary)]">{post.readTime}</span>
+                </div>
+                <h4 className="font-medium text-[var(--win11-text-primary)] text-sm">{post.title}</h4>
+              </div>
+            ))}
+          </div>
+
+          {/* Newsletter CTA */}
+          <div className="p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/20">
+            <p className="text-sm text-[var(--win11-text-primary)] mb-2">Subscribe to my newsletter</p>
+            <p className="text-xs text-[var(--win11-text-secondary)]">Get notified when I publish new articles.</p>
+          </div>
+        </div>
+      ),
+    },
+    contact: {
+      title: "Contact",
+      icon: (
+        <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center p-1.5">
+          <MailIcon />
+        </div>
+      ),
+      content: (
+        <div className="space-y-4">
+          <p className="text-sm text-[var(--win11-text-secondary)]">
+            Have a project in mind or want to discuss opportunities? I&apos;d love to hear from you.
+          </p>
+
+          {/* Contact Methods */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-[var(--win11-bg-surface-secondary)]">
+              <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-[var(--win11-text-primary)]">Email</p>
+                <p className="text-xs text-orange-400">hello@tikaram.ac</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-[var(--win11-bg-surface-secondary)]">
+              <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-[var(--win11-text-primary)]">Location</p>
+                <p className="text-xs text-[var(--win11-text-secondary)]">Available for remote work</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-[var(--win11-bg-surface-secondary)]">
+              <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-[var(--win11-text-primary)]">Response Time</p>
+                <p className="text-xs text-[var(--win11-text-secondary)]">Usually within 24 hours</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div>
+            <p className="text-sm font-medium text-[var(--win11-text-primary)] mb-3">Follow Me</p>
+            <div className="flex gap-3">
+              <a
+                href="https://github.com/tikaramac19"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-[var(--win11-bg-surface-secondary)] rounded-lg flex items-center justify-center text-[var(--win11-text-secondary)] hover:text-white hover:bg-[#24292e] transition-colors"
+              >
+                <GithubIcon />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-[var(--win11-bg-surface-secondary)] rounded-lg flex items-center justify-center text-[var(--win11-text-secondary)] hover:text-white hover:bg-[#0A66C2] transition-colors"
+              >
+                <LinkedInIcon />
+              </a>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+  };
+
+  const panel = panelContent[activePanel];
+  if (!panel) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-20"
+        onClick={onClose}
+      >
+        {/* Backdrop - subtle overlay without blur like Start Menu */}
+        <div className="absolute inset-0 bg-black/10" />
+
+        {/* Panel - styled like Start Menu */}
+        <motion.div
+          initial={{ x: "100%", opacity: 0.8 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: "100%", opacity: 0.8 }}
+          transition={{ type: "spring", damping: 30, stiffness: 300 }}
+          onClick={(e) => e.stopPropagation()}
+          className="absolute right-0 top-0 bottom-14 w-full max-w-md bg-[#202020]/95 backdrop-blur-2xl border-l border-white/10 shadow-2xl overflow-hidden rounded-l-lg"
+        >
+          {/* Panel Header */}
+          <div className="flex items-center justify-between p-4 border-b border-white/10">
+            <div className="flex items-center gap-3">
+              {panel.icon}
+              <h2 className="text-lg font-semibold text-white">{panel.title}</h2>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-lg hover:bg-white/10 text-white/60 hover:text-white transition-colors"
+            >
+              <CloseIcon />
+            </button>
+          </div>
+
+          {/* Panel Content */}
+          <div className="p-4 overflow-y-auto h-[calc(100%-140px)]">
+            {panel.content}
+          </div>
+
+          {/* Footer with View Full Page Link */}
+          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 bg-[#202020]/95">
+            <button
+              onClick={() => {
+                onNavigate(pageRoutes[activePanel]);
+                onClose();
+              }}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/15 rounded-lg text-white/80 hover:text-white transition-colors text-sm font-medium"
+            >
+              <span>View Full Page</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 // ==================== MAIN PAGE ====================
 
 export default function HomePage() {
   const router = useRouter();
   const [openWindow, setOpenWindow] = useState<string | null>(null);
+  const [activePanel, setActivePanel] = useState<string | null>(null);
 
   // Handle app/icon clicks
   const handleAppClick = (appId: string) => {
     switch (appId) {
       case "about":
-        router.push("/about");
-        break;
       case "experience":
       case "projects":
-        router.push("/experience");
-        break;
       case "blog":
-        router.push("/blog");
-        break;
       case "contact":
-        router.push("/contact");
+        setActivePanel(appId);
         break;
       case "github":
         window.open("https://github.com/tikaramac19", "_blank");
@@ -322,11 +755,9 @@ export default function HomePage() {
         window.open("https://linkedin.com", "_blank");
         break;
       case "vscode":
-        // Open a welcome window
         setOpenWindow("welcome");
         break;
       case "edge":
-        // Open browser simulation or navigate somewhere
         setOpenWindow("browser");
         break;
       default:
@@ -374,7 +805,7 @@ export default function HomePage() {
                   <button
                     onClick={() => {
                       setOpenWindow(null);
-                      router.push("/about");
+                      setActivePanel("about");
                     }}
                     className="p-4 bg-[var(--win11-bg-surface-secondary)] rounded-lg hover:bg-[var(--win11-bg-card-hover)] transition-colors text-left"
                   >
@@ -391,7 +822,7 @@ export default function HomePage() {
                   <button
                     onClick={() => {
                       setOpenWindow(null);
-                      router.push("/experience");
+                      setActivePanel("experience");
                     }}
                     className="p-4 bg-[var(--win11-bg-surface-secondary)] rounded-lg hover:bg-[var(--win11-bg-card-hover)] transition-colors text-left"
                   >
@@ -408,7 +839,7 @@ export default function HomePage() {
                   <button
                     onClick={() => {
                       setOpenWindow(null);
-                      router.push("/blog");
+                      setActivePanel("blog");
                     }}
                     className="p-4 bg-[var(--win11-bg-surface-secondary)] rounded-lg hover:bg-[var(--win11-bg-card-hover)] transition-colors text-left"
                   >
@@ -425,7 +856,7 @@ export default function HomePage() {
                   <button
                     onClick={() => {
                       setOpenWindow(null);
-                      router.push("/contact");
+                      setActivePanel("contact");
                     }}
                     className="p-4 bg-[var(--win11-bg-surface-secondary)] rounded-lg hover:bg-[var(--win11-bg-card-hover)] transition-colors text-left"
                   >
@@ -490,7 +921,7 @@ export default function HomePage() {
                     <button
                       onClick={() => {
                         setOpenWindow(null);
-                        router.push("/about");
+                        setActivePanel("about");
                       }}
                       className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                     >
@@ -499,7 +930,7 @@ export default function HomePage() {
                     <button
                       onClick={() => {
                         setOpenWindow(null);
-                        router.push("/experience");
+                        setActivePanel("experience");
                       }}
                       className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
                     >
@@ -508,7 +939,7 @@ export default function HomePage() {
                     <button
                       onClick={() => {
                         setOpenWindow(null);
-                        router.push("/contact");
+                        setActivePanel("contact");
                       }}
                       className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
                     >
@@ -573,6 +1004,13 @@ export default function HomePage() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Right Side Panel */}
+      <RightPanel
+        activePanel={activePanel}
+        onClose={() => setActivePanel(null)}
+        onNavigate={(path) => router.push(path)}
+      />
     </Win11Desktop>
   );
 }
