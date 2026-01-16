@@ -398,7 +398,7 @@ function HomeWidgets({ currentTime }: { currentTime: Date }) {
       {/* Welcome Banner */}
       <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-white/10 mb-4">
         <h1 className="text-3xl font-light text-white mb-1">
-          {greeting()}, Tikaram
+          {greeting()}, Visitor{" "}
         </h1>
         <p className="text-white/70 text-sm">
           {currentTime.toLocaleDateString("en-US", {
@@ -741,7 +741,7 @@ function StartMenu({
               <div className="w-8 h-8 bg-[#0078D4] rounded-full flex items-center justify-center">
                 <UserIcon />
               </div>
-              <span className="text-sm text-white">Tikaram</span>
+              <span className="text-sm text-white">Tikaram Acharya</span>
             </button>
             <button className="p-2 hover:bg-white/10 rounded-md text-white/80">
               <PowerIcon />
