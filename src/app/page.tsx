@@ -429,13 +429,12 @@ const RightPanel = ({ activePanel, onClose, onNavigate }: RightPanelProps) => {
               {aboutData.certifications.map((cert, i) => (
                 <span
                   key={i}
-                  className={`text-xs px-2 py-1 rounded-full ${
-                    cert.status === "completed"
-                      ? "bg-green-500/20 text-green-400"
-                      : cert.status === "in-progress"
+                  className={`text-xs px-2 py-1 rounded-full ${cert.status === "completed"
+                    ? "bg-green-500/20 text-green-400"
+                    : cert.status === "in-progress"
                       ? "bg-yellow-500/20 text-yellow-400"
                       : "bg-gray-500/20 text-gray-400"
-                  }`}
+                    }`}
                 >
                   {cert.name}
                 </span>
